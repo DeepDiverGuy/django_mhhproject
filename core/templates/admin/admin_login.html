@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script> <!-- Alpine JS Source -->
+
+    <!-- <link href="https://unpkg.com/tailwindcss@1.0.4/dist/tailwind.min.css" rel="stylesheet"> -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+
+</head>
+<body>
+
+   	<!-- Login Form -->
+    <!-- <div class="bg-green-400 h-screen w-screen"> -->
+    <div class="h-14 bg-gradient-to-r from-violet-500 to-fuchsia-500 to-teal-400 h-screen w-screen">
+        <div class="flex flex-col items-center flex-1 h-full justify-center px-4 sm:px-0">
+            <div class="flex rounded-lg shadow-lg w-full sm:w-3/4 lg:w-1/2 bg-white sm:mx-0" style="height: 500px">
+                <div class="flex flex-col w-full md:w-1/2 p-4">
+                    <div class="flex flex-col flex-1 justify-center mb-8">
+                        <h1 class="text-4xl text-center font-thin">Administration</h1>
+                        <div class="w-full mt-4">
+
+                            {% if error_message %}
+                                <div class="bg-red-500 text-white px-6 py-4 border-0 rounded relative mb-4">
+                                    {{ error_message }}
+                                </div>
+                            {% endif %}
+
+
+                            <form class="form-horizontal w-3/4 mx-auto" method="POST">
+                                {% csrf_token %}
+
+                                <div class="flex flex-col mt-4">
+                                    <input id="username" type="text" class="flex-grow h-8 px-2 border rounded border-grey-400" name="username" value="" placeholder="Username" required>
+                                </div>
+
+                                <!-- Simple Password Field -->
+                                <div class="flex flex-col mt-4">
+                                    <input id="password" type="password" class="flex-grow h-8 px-2 rounded border border-grey-400" name="password" placeholder="Password" required>
+                                </div>
+
+                                 <!-- Password with show/hide eye icon -->
+                                <!-- <div class="flex flex-col mt-4" x-data="{ show: true }">
+                                    <div class="relative">
+                                    <input placeholder="Password" :type="show ? 'password' : 'text'" class="flex-grow h-8 px-2 rounded border border-grey-400" id="password" type="password">
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-4">
+    
+                                        <svg class="h-6 text-gray-700" fill="none" @click="show = !show"
+                                        :class="{'hidden': !show, 'block':show }" xmlns="http://www.w3.org/2000/svg"
+                                        viewbox="0 0 576 512">
+                                        <path fill="currentColor"
+                                            d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z">
+                                        </path>
+                                        </svg>
+    
+                                        <svg class="h-6 text-gray-700" fill="none" @click="show = !show"
+                                        :class="{'block': !show, 'hidden':show }" xmlns="http://www.w3.org/2000/svg"
+                                        viewbox="0 0 640 512">
+                                        <path fill="currentColor"
+                                            d="M320 400c-75.85 0-137.25-58.71-142.9-133.11L72.2 185.82c-13.79 17.3-26.48 35.59-36.72 55.59a32.35 32.35 0 0 0 0 29.19C89.71 376.41 197.07 448 320 448c26.91 0 52.87-4 77.89-10.46L346 397.39a144.13 144.13 0 0 1-26 2.61zm313.82 58.1l-110.55-85.44a331.25 331.25 0 0 0 81.25-102.07 32.35 32.35 0 0 0 0-29.19C550.29 135.59 442.93 64 320 64a308.15 308.15 0 0 0-147.32 37.7L45.46 3.37A16 16 0 0 0 23 6.18L3.37 31.45A16 16 0 0 0 6.18 53.9l588.36 454.73a16 16 0 0 0 22.46-2.81l19.64-25.27a16 16 0 0 0-2.82-22.45zm-183.72-142l-39.3-30.38A94.75 94.75 0 0 0 416 256a94.76 94.76 0 0 0-121.31-92.21A47.65 47.65 0 0 1 304 192a46.64 46.64 0 0 1-1.54 10l-73.61-56.89A142.31 142.31 0 0 1 320 112a143.92 143.92 0 0 1 144 144c0 21.63-5.29 41.79-13.9 60.11z">
+                                        </path>
+                                        </svg>
+                                    </div>
+                                    </div>
+                                </div> -->
+
+                                <div class="flex items-center mt-4">
+                                    <input type="checkbox" name="remember" id="remember" class="mr-2"> <label for="remember" class="text-sm text-grey-dark">Remember Me</label>
+                                </div>
+
+                                <div class="flex flex-col mt-8">
+                                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded">
+                                        Login
+                                    </button>
+                                </div>
+                        
+                            </form>
+
+                            <div class="text-center mt-4">
+                                <a class="no-underline hover:underline text-blue-dark text-xs" href="">
+                                    Forgot Your Password?
+                                </a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block md:w-1/2 rounded-r-lg" style="background: url('https://images.unsplash.com/photo-1515965885361-f1e0095517ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3300&q=80'); background-size: cover; background-position: center center;"></div>
+                <!-- <div class="hidden md:block md:w-1/2 rounded-r-lg" style="background-image: url(img/image.jpg); background-size: cover; background-position: center center;"></div> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Remove later -->
+    <!-- <script>
+        function validateForm() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (username !== "admin" || password !== "123") {
+                alert("Invalid username or password.");
+                return false;
+            }
+
+            return true;
+        }
+    </script> -->
+
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector("form");
+        
+            form.addEventListener("submit", function(event) {
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+
+                if (username !== "admin" || password !== "123") {
+                    alert("Invalid username or password.");
+                    event.preventDefault();
+                }
+            });
+        });
+    </script> -->
+
+
+    
+
+</body>
+</html>
+
+
+

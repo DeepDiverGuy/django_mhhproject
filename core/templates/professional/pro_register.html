@@ -1,0 +1,293 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Specialist | Register</title>
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    
+    <!-- Alpine JS Source -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script> 
+
+
+</head>
+<body>
+
+    <div calss="items-center">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                <h1 class="text-xl md:text-2xl font-bold leading-tight mt-5 text-center">{{ message }}</h1>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+    <section class="flex flex-col md:flex-row items-center">
+
+        <div class="lg:block w-full md:w-1/2 xl:w-2/3"> <!-- bg-indigo-600 hidden -->
+
+        <!-- <img src="https://source.unsplash.com/random" alt="" class="w-full h-full object-cover"> -->
+        <!-- <img src="https://doctime.com.bd/images/bg/reg_doctor_detail_bg.png" alt="" class="w-full h-full object-cover"> -->
+        <!-- <img src="{% static 'img/doctor_reg.png' %}" alt="" class="w-full h-full object-cover"> -->
+        <img src="{% static 'img/doctor_reg.png' %}" alt="" class="w-full h-full object-cover">
+        </div>
+  
+        <div class="bg-slate-100 w-full md:max-w-md lg:max-w-full md:mx-auto md:mx-0 md:w-1/2 xl:w-1/3 px-6 lg:px-16 xl:px-12 md:flex items-center justify-center">
+  
+            <div class="w-full">
+  
+            <h1 class="text-xl md:text-2xl font-bold leading-tight mt-12 text-center">Professional Registration</h1>
+
+            <form class="mt-6" method="POST">
+            {% csrf_token %}
+
+                <!-- <div class="w-full md:w-1/2 px-3"> -->
+                <div class="w-full">
+                    <label class="block text-black"> Professional Role </label>
+                    <select name="pro_type" class="w-full px-4 py-3 mb-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" id="title" required> 
+                      <option selected> -- Select Professional Type -- </option>
+                      <option value="psychologist">Psychologist</option>
+                      <option value="psychiatrist">Psychiatrist Dr.</option>
+                      <option value="therapist">Therapist</option>
+                      <option value="counsellor">Counsellor</option>
+                      <option value="social">Clinical Social Worker</option>
+                    </select>
+                </div>
+
+                <div class="mb-4 md:flex md:justify-between">
+                    <div class="mb-4 md:mr-2 md:mb-0">
+                        <label class="block text-black">First Name</label>
+                        <input name="first_name" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" id="firstName" type="text" placeholder="First Name" required>
+                    </div>
+                    <div class="md:ml-2">
+                        <label class="block text-black">Last Name</label>
+                        <input name="last_name" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" id="lastName" type="text" placeholder="Last Name" required>
+                    </div>
+                </div>
+
+                <!-- DOB and Gender -->
+                <div class="flex flex-wrap -mx-3 mb-6">
+
+                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block text-black"> Date of Birth </label>
+                      <input name="dob" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" id="dob" type="date" required> 
+                    </div>
+
+                    <div class="w-full md:w-1/2 px-3">
+                        <label class="block text-black"> Gender </label>
+                      <select name="gender" id="gender" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" required> 
+                        <option selected> -- Select Gender -- </option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+                    
+                </div>
+
+                <!-- Email & Phone Field -->
+                <div class="mb-4 md:flex md:justify-between">
+                    <div class="mb-4 md:mr-2 md:mb-0">
+                        <label class="block text-black">Email</label>
+                        <input name="email" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" type="email" id="email" placeholder="Enter Email" required>
+                    </div>
+                    <div class="md:ml-2">
+                        <label class="block text-black">Phone</label>
+                        <input name="phone" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" id="phone" type="text" placeholder="Phone Number" required>
+                    </div>
+                </div>
+
+                <!-- city, State and Zipcode -->
+                <div class="flex flex-wrap -mx-3 mb-2">
+                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block text-black" for="grid-city"> City </label>
+                    <input name="city" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" id="grid-city" type="text" placeholder="City">
+                    </div>
+
+                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block text-black" for="grid-state"> State </label>
+                    <input name="state" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" id="grid-city" type="text" placeholder="State">
+                    </div>
+                    
+                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block text-black" for="grid-zip"> Zip </label>
+                    <input name="zip" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" id="grid-zip" type="text" placeholder="Zipcode">
+                    </div>
+                </div>
+
+                <!-- Educational Background and Practice Specialty -->
+                <div class="mt-4">
+                    <label class="block text-black"> Educational Qualification </label>
+                        <select name="edu_type" id="education" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" required> 
+                            <option selected> -- Select Qualification -- </option>
+                            <option value="md">M.D.</option>
+                            <option value="psyd">Psy.D</option>
+                            <option value="phd">PhD</option>
+                            <option value="masters_counsel">MSc in Counseling Psychology</option>
+                            <option value="masters_social">MSc in Clinical Social Work</option>
+                        </select>
+                </div>  
+                
+                
+
+                <div class="mt-4">
+                    <label class="block text-black">Professional License or Certification Number</label>
+                    <input type="text" name="license" id="license" placeholder="Enter License or Certification Number" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" required>
+                </div>  
+               
+                <div class="mt-4">
+                    <label class="block text-black">National ID / Passport Number</label>
+                    <input type="text" name="nid_passport" id="nid_passport" placeholder="Enter National ID / Passport Number" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" required>
+                </div>  
+
+               
+    
+                <!-- Password with show/hide eye icon -->
+                <div class="mt-4" x-data="{ show: true }">
+                    <label class="block text-black">Password</label>
+                    <div class="relative">
+                    <input :type="show ? 'password' : 'text'" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" type="password" name="password" id="password" placeholder="Enter Password" required>
+                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+    
+                        <svg class="h-6 text-gray-700" fill="none" @click="show = !show"
+                        :class="{'hidden': !show, 'block':show }" xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 576 512">
+                        <path fill="currentColor"
+                            d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z">
+                        </path>
+                        </svg>
+    
+                        <svg class="h-6 text-gray-700" fill="none" @click="show = !show"
+                        :class="{'block': !show, 'hidden':show }" xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 640 512">
+                        <path fill="currentColor"
+                            d="M320 400c-75.85 0-137.25-58.71-142.9-133.11L72.2 185.82c-13.79 17.3-26.48 35.59-36.72 55.59a32.35 32.35 0 0 0 0 29.19C89.71 376.41 197.07 448 320 448c26.91 0 52.87-4 77.89-10.46L346 397.39a144.13 144.13 0 0 1-26 2.61zm313.82 58.1l-110.55-85.44a331.25 331.25 0 0 0 81.25-102.07 32.35 32.35 0 0 0 0-29.19C550.29 135.59 442.93 64 320 64a308.15 308.15 0 0 0-147.32 37.7L45.46 3.37A16 16 0 0 0 23 6.18L3.37 31.45A16 16 0 0 0 6.18 53.9l588.36 454.73a16 16 0 0 0 22.46-2.81l19.64-25.27a16 16 0 0 0-2.82-22.45zm-183.72-142l-39.3-30.38A94.75 94.75 0 0 0 416 256a94.76 94.76 0 0 0-121.31-92.21A47.65 47.65 0 0 1 304 192a46.64 46.64 0 0 1-1.54 10l-73.61-56.89A142.31 142.31 0 0 1 320 112a143.92 143.92 0 0 1 144 144c0 21.63-5.29 41.79-13.9 60.11z">
+                        </path>
+                        </svg>
+                    </div>
+                    </div>                   
+                </div>
+
+                <!-- Confirm Password -->
+                <!-- <div class="mt-4" x-data="{ show: true }">
+                    <div class="relative">
+                    <input :type="show ? 'password' : 'text'" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" required>
+                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+    
+                        <svg class="h-6 text-gray-700" fill="none" @click="show = !show"
+                        :class="{'hidden': !show, 'block':show }" xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 576 512">
+                        <path fill="currentColor"
+                            d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z">
+                        </path>
+                        </svg>
+    
+                        <svg class="h-6 text-gray-700" fill="none" @click="show = !show"
+                        :class="{'block': !show, 'hidden':show }" xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 640 512">
+                        <path fill="currentColor"
+                            d="M320 400c-75.85 0-137.25-58.71-142.9-133.11L72.2 185.82c-13.79 17.3-26.48 35.59-36.72 55.59a32.35 32.35 0 0 0 0 29.19C89.71 376.41 197.07 448 320 448c26.91 0 52.87-4 77.89-10.46L346 397.39a144.13 144.13 0 0 1-26 2.61zm313.82 58.1l-110.55-85.44a331.25 331.25 0 0 0 81.25-102.07 32.35 32.35 0 0 0 0-29.19C550.29 135.59 442.93 64 320 64a308.15 308.15 0 0 0-147.32 37.7L45.46 3.37A16 16 0 0 0 23 6.18L3.37 31.45A16 16 0 0 0 6.18 53.9l588.36 454.73a16 16 0 0 0 22.46-2.81l19.64-25.27a16 16 0 0 0-2.82-22.45zm-183.72-142l-39.3-30.38A94.75 94.75 0 0 0 416 256a94.76 94.76 0 0 0-121.31-92.21A47.65 47.65 0 0 1 304 192a46.64 46.64 0 0 1-1.54 10l-73.61-56.89A142.31 142.31 0 0 1 320 112a143.92 143.92 0 0 1 144 144c0 21.63-5.29 41.79-13.9 60.11z">
+                        </path>
+                        </svg>
+                    </div>
+                    </div>                   
+                </div> -->
+
+      
+   
+                <button type="submit" class="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg px-4 py-3 mt-6">Register</button>
+      
+                <hr class="my-6 border-gray-300 w-full">
+      
+                <div>
+                    <p class="text-center">Already have an account? <a href="{% url 'pro_login' %}" class="text-blue-500 hover:underline hover:text-blue-700 font-semibold">Login</a>
+                    </p>
+                </div><br>
+            </form>
+      
+            </div>
+          </div>
+        </div>
+      
+    </section>
+
+    <!-- Restrict Future Dates -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        var now = new Date(),
+        maxDate = now.toISOString().substring(0,10);
+
+        $('#dob').prop('max', maxDate);
+    </script>
+
+    <!-- DoB Validation -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    // get the input field
+    const dobInput = document.getElementById("dob");
+
+    // add event listener for input validation
+    dobInput.addEventListener("input", function() {
+    // get the entered date value
+    const dobValue = this.value;
+  
+    // validate the date format (YYYY-MM-DD)
+    const dateFormat = /^(\d{4})-(\d{2})-(\d{2})$/;
+    const validFormat = dateFormat.test(dobValue);
+  
+    // validate the date range (between 1900 and current year)
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const minYear = 1900;
+    const maxYear = currentYear;
+    const enteredDate = new Date(dobValue);
+    const enteredYear = enteredDate.getFullYear();
+    const validRange = enteredYear >= minYear && enteredYear <= maxYear;
+  
+    // set the input field validation status
+    if (validFormat && validRange) {
+        dobInput.setCustomValidity("");
+    } else {
+        dobInput.setCustomValidity("Please enter a valid date of birth (YYYY-MM-DD) between 1900 and the current year.");
+    }
+    });
+
+    </script>
+
+
+    <!-- // Get the current date
+const currentDate = new Date();
+
+// Get the input element
+const dobInput = document.getElementById("dob");
+
+// Add an event listener to the input element
+dobInput.addEventListener("change", function() {
+  // Get the entered date
+  const enteredDate = new Date(this.value);
+  
+  // Check if the entered date is valid and not equal to the current date
+  if (enteredDate.toString() === "Invalid Date" || enteredDate >= currentDate) {
+    this.setCustomValidity("Please enter a valid date of birth");
+  } else {
+    this.setCustomValidity("");
+  }
+});
+ -->
+
+
+</body>
+</html>
